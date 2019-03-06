@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiCrud.Business.Facade.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,6 +20,8 @@ namespace ApiCrud.Business.Facade
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.MessageHandlers.Add(new LanguageMessageHandler());
         }
     }
 }
