@@ -17,7 +17,7 @@ namespace ApiCrud.Repository.Logic.Repository.Tests
     public class StudentRepositoryTests : IoCSupportedTest<BusinessLogicTestModule>
     {
         private IRepository<Student> studentRepository;
-        private static Student studentToCreate, studentToRead, studentToUpdate, studentToDelete;
+        private Student studentToCreate, studentToRead, studentToUpdate, studentToDelete;
 
         [TestInitialize]
         public void Setup()

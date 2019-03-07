@@ -11,6 +11,11 @@ using System.Web.Http.Description;
 
 namespace ApiCrud.Business.Facade.Controllers
 {
+    /// <summary>
+    /// customer controller class for testing security token
+    /// </summary>
+    [Authorize]
+    [RoutePrefix("api/Student")]
     public class StudentController : ApiController
     {
         private readonly ILogger Log;

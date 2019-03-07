@@ -44,11 +44,10 @@ namespace ApiCrud.Repository.Logic.Repository
 
                     using (SqlCommand sqlCommand = new SqlCommand(queryString, sqlConnection))
                     {
-                        sqlCommand.Parameters.Add("@uuid", SqlDbType.UniqueIdentifier, 50).Value = model.Guid;
+                        sqlCommand.Parameters.Add("@uuid", SqlDbType.UniqueIdentifier).Value = model.Guid;
                         sqlCommand.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = model.Name;
                         sqlCommand.Parameters.Add("@surname", SqlDbType.VarChar, 100).Value = model.Surname;
                         sqlCommand.Parameters.Add("@cardId", SqlDbType.VarChar, 15).Value = model.CardId;
-                        sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = model.Id;
                         sqlCommand.Parameters.Add("@age", SqlDbType.Int).Value = model.Age;
                         sqlCommand.Parameters.Add("@dateborn", SqlDbType.DateTime).Value = model.DateBorn;
                         sqlCommand.Parameters.Add("@dateregistry", SqlDbType.DateTime).Value = model.DateRegistry;

@@ -1,4 +1,5 @@
-﻿using ApiCrud.Business.Facade.Handlers;
+﻿using ApiCrud.Business.Facade.Controllers;
+using ApiCrud.Business.Facade.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace ApiCrud.Business.Facade
             );
 
             config.MessageHandlers.Add(new LanguageMessageHandler());
+            config.MessageHandlers.Add(new TokenValidationHandler());
         }
     }
 }
