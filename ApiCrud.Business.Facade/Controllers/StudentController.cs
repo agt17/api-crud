@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ApiCrud.Business.Facade.Controllers
 {
@@ -14,58 +15,63 @@ namespace ApiCrud.Business.Facade.Controllers
     {
         private readonly ILogger Log;
         private readonly IBusiness<Student> studentBl;
-
-        public StudentController(ILogger Log, IBusiness<Student> business)
+        public StudentController(ILogger Log,
+            IBusiness<Student> business)
         {
             this.Log = Log;
             this.studentBl = business;
         }
+        
+        [ConnectionFilter]
+        [HttpGet]
+        public IHttpActionResult GetById(int id)
+        {
+            Log.Debug(StringResources.DebugMethod + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            return Ok(studentBl.ReadById(id));
+        }
 
         [ConnectionFilter]
-        [HttpGet()]
-        // GET api/students
+        [HttpGet]
         public IHttpActionResult ReadAll()
         {
-            Log.Debug(StringResources.DebugMethod + 
-                System.Reflection.MethodBase.GetCurrentMethod().Name);
-
+            Log.Debug(StringResources.DebugMethod +
+                System.Reflection.MethodBase.
+                GetCurrentMethod().Name);
             return Ok(studentBl.ReadAll());
         }
-        /*
+
         [ConnectionFilter]
-        [HttpGet()]
-        // GET api/student/5
-        public IHttpActionResult ReadById(int id)
+        [HttpPost()]
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult Create(Student entity)
         {
             Log.Debug(StringResources.DebugMethod +
-                System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-            return Ok(studentBl.ReadById(id));
-        }*/
-
-        // POST api/student
-        public void Post([FromBody]string value)
-        {
-            Log.Debug(StringResources.DebugMethod +
-                System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-            //studentBl.Create();
+                System.Reflection.MethodBase.
+                GetCurrentMethod().Name);
+            return Ok(studentBl.Create(entity));
         }
 
-        // PUT api/student/5
-        public void Put(int id, [FromBody]string value)
+        [ConnectionFilter]
+        [HttpPut()]
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult Update(int id, Student entity)
         {
             Log.Debug(StringResources.DebugMethod +
-                System.Reflection.MethodBase.GetCurrentMethod().Name);
-
+                System.Reflection.
+                MethodBase.GetCurrentMethod().Name);
+            return Ok(studentBl.Update(id, entity));
         }
 
-        // DELETE api/student/5
-        public void Delete(int id)
+        [ConnectionFilter]
+        [HttpDelete()]
+        public IHttpActionResult Delete(int id)
         {
             Log.Debug(StringResources.DebugMethod +
-                System.Reflection.MethodBase.GetCurrentMethod().Name);
-
+                System.Reflection.MethodBase.
+                GetCurrentMethod().Name);
+            return Ok(studentBl.Delete(id));
         }
+
     }
 }
+ 
